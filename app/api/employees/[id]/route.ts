@@ -58,10 +58,8 @@ async function updateEmployee(id: string, data: {employeeName: string, employeeD
 }
 
 //get call
-export async function GET(
-    req: Request,
-    { params }: { params: { id: string } }
-) {
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+    const params = await props.params;
     try {
         const id = params.id;
         const employee = await fetchEmployee(id);
@@ -75,10 +73,8 @@ export async function GET(
 }
 
 //delete call
-export async function DELETE(
-    req: Request,
-    { params }: { params: { id: string } }
-) {
+export async function DELETE(req: Request, props: { params: Promise<{ id: string }> }) {
+    const params = await props.params;
     try {
         const id = params.id;
         await deleteEmployee(id);
@@ -92,10 +88,8 @@ export async function DELETE(
 }
 
 //update call
-export async function PUT(
-    req: Request,
-    { params }: { params: { id: string } }
-) {
+export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
+    const params = await props.params;
     try {
         const id = params.id;
         const employee = await req.json();
